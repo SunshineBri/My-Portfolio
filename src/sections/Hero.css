@@ -1,0 +1,103 @@
+.hero-section {
+  padding: 3rem 2rem; /* Reduced vertical padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px; /* Wider layout */
+  width: 100%;
+  gap: 3rem;
+  margin: 0 auto;
+}
+
+.hero-text {
+  flex: 1;
+  text-align: left;
+}
+
+@keyframes letterSpacingIn {
+  0% {
+    letter-spacing: 0;
+  }
+  100% {
+    letter-spacing: 0.15em;
+  }
+}
+
+/* Original h1 styles with added letter-spacing 0 to start */
+.hero-text h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 1.25rem;
+  color: #f9fafb;
+  letter-spacing: 0;
+  transition: letter-spacing 0.3s ease;
+}
+
+/* Animate class triggers letter spacing animation */
+.hero-text h1.animate-letter-spacing {
+  animation: letterSpacingIn 1s ease forwards;
+  letter-spacing: 0.15em;
+}
+
+.hero-text h1:hover {
+  letter-spacing: 0.3em;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--accent, #a78bfa);
+  max-width: 600px;
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic {
+  width: 100%;
+  max-width: 350px; /* Larger image */
+  height: auto;
+  object-fit: cover;
+  border-radius: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem !important; /* reduce space between text and image */
+  }
+
+  .hero-text {
+    text-align: center !important;
+  }
+
+  .hero-image {
+    margin-top: 2rem;
+  }
+  
+  /* Smaller text on mobile */
+  .hero-text h1 {
+    font-size: 2rem !important;
+  }
+
+  .hero-text p {
+    font-size: 1rem !important;
+  }
+}

@@ -1,0 +1,72 @@
+#about {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+  color: #e5e5e5;
+  font-family: 'Space Grotesk', sans-serif;
+  padding-top: 100px;
+  margin-top: -100px;
+}
+
+#about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #f9fafb;
+  font-weight: 600;
+  text-align: center;
+}
+
+#about .about-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+#about img {
+  width: 250px;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  box-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
+  flex-shrink: 0;
+}
+
+#about p {
+  flex: 1;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+/* Start completely hidden and off screen */
+#about.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: none;
+  pointer-events: none; /* Optional: prevent interaction when hidden */
+}
+
+/* Fade in smoothly when visible */
+#about.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  pointer-events: auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #about .about-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  #about img {
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  #about p {
+    max-width: 100%;
+  }
+}
