@@ -3,18 +3,40 @@ import { MdEmail } from "react-icons/md";
 
 function Contact() {
   return (
-    <section id="contact" className="contact">
-      <div className="contact-container">
-        <h2>Contact</h2>
+    <section id="contact" className="contact-section">
+      <div className="contact-glass-card">
 
-        <p>
-          Let’s connect — I’m open to opportunities, collaborations, or just a chat about development.
+        <h2 className="contact-title">Let’s Connect</h2>
+
+        <p className="contact-kicker">
+          Open to work • Freelance • Collaboration
         </p>
+
+        <p className="contact-text">
+          I’m open to opportunities, collaborations, or just a conversation about development and design.
+        </p>
+
+        <div className="contact-stats">
+          <div>
+            <strong>Based in</strong>
+            <span>Trinidad & Tobago</span>
+          </div>
+
+          <div>
+            <strong>Response</strong>
+            <span>Within 24h</span>
+          </div>
+
+          <div>
+            <strong>Status</strong>
+            <span>Available</span>
+          </div>
+        </div>
 
         <div className="contact-links">
           <a href="mailto:brittneydhanoo@gmail.com">
             <MdEmail size={20} />
-            <span>Email</span>
+            <span>Email Me</span>
           </a>
 
           <a
@@ -35,6 +57,7 @@ function Contact() {
             <span>LinkedIn</span>
           </a>
         </div>
+
       </div>
     </section>
   );
