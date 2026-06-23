@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Projects.css';
 import EZLogo from "../assets/EZ-logo.jpg";
+import TFTLogo from "../assets/Tee-for-today-logo.png";
 
 function Projects() {
   const projectRefs = useRef([]);
@@ -50,7 +51,7 @@ function Projects() {
     },
     { title: 'Tee for Today', 
      link: 'https://sunshinebri.github.io/tee-for-today/', 
-     img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' 
+     img: TFTLogo, 
     },
     { title: 'Project Three', link: '#', img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' },
     { title: 'Project Four', link: '#', img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' },
