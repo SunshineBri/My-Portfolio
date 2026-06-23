@@ -48,7 +48,10 @@ function Projects() {
       link: '#',
       img: EZLogo,
     },
-    { title: 'Project Two', link: '#', img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' },
+    { title: 'Tee for Today', 
+     link: 'https://sunshinebri.github.io/tee-for-today/', 
+     img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' 
+    },
     { title: 'Project Three', link: '#', img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' },
     { title: 'Project Four', link: '#', img: 'https://firstbenefits.org/wp-content/uploads/2017/10/placeholder-1024x1024.png' },
   ];
