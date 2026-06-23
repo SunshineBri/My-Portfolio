@@ -1,0 +1,48 @@
+.contact {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.contact-container {
+  max-width: 600px;
+  text-align: center;
+}
+
+.contact-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.contact-container p {
+  color: #cfcfcf;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+
+  color: #e5e5e5;
+  transition: 0.3s;
+}
+
+.contact-links a:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.05);
+}
