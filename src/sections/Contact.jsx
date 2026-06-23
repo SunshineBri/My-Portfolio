@@ -1,15 +1,44 @@
 import { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail, MdSend } from "react-icons/md";
+import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle your form submission logic here (e.g., EmailJS, Formspree, etc.)
-    console.log("Form submitted:", formData);
+    setIsSending(true);
+
+    // Map your form fields to your EmailJS Template variables
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+    };
+
+    // Safely fetch keys from your environment variables instead of hardcoding them
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    emailjs
+      .send(serviceId, templateId, templateParams, publicKey)
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          alert("Message sent successfully! ✨");
+          setFormData({ name: "", email: "", message: "" }); // Reset form inputs
+          setIsSending(false);
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          alert("Oops! Something went wrong. Please try emailing me directly.");
+          setIsSending(false);
+        }
+      );
   };
 
   return (
@@ -96,8 +125,8 @@ function Contact() {
               ></textarea>
             </div>
 
-            <button type="submit" className="form-submit-btn">
-              <span>Send Message</span>
+            <button type="submit" className="form-submit-btn" disabled={isSending}>
+              <span>{isSending ? "Sending..." : "Send Message"}</span>
               <MdSend size={16} />
             </button>
           </form>
