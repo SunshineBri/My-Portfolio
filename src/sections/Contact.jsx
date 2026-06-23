@@ -1,8 +1,17 @@
+import { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import "./Contact.css"; // <-- ADD THIS LINE TO FIX THE STYLING DISCONNECT!
+import { MdEmail, MdSend } from "react-icons/md";
+import "./Contact.css";
 
 function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle your form submission logic here (e.g., EmailJS, Formspree, etc.)
+    console.log("Form submitted:", formData);
+  };
+
   return (
     <section id="contact" className="contact-section">
       <div className="contact-glass-card">
@@ -16,53 +25,82 @@ function Contact() {
         </div>
 
         <div className="contact-content-grid">
-          {/* Quick Stats Grid Column */}
-          <div className="contact-stats">
-            <div className="stat-box">
+          {/* Left Column: Primary Action Links + Location */}
+          <div className="contact-left-col">
+            <div className="contact-links">
+              <a href="mailto:brittneydhanoo@gmail.com" className="contact-btn email-btn">
+                <MdEmail size={20} />
+                <span>Email Me</span>
+              </a>
+
+              <div className="social-row">
+                <a
+                  href="https://github.com/SunshineBri"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-btn social-btn"
+                >
+                  <FaGithub size={20} />
+                  <span>GitHub</span>
+                </a>
+
+                <a
+                  href="https://linkedin.com/in/brittney-dhanoo-176339149"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-btn social-btn"
+                >
+                  <FaLinkedin size={20} />
+                  <span>LinkedIn</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="contact-location">
               <strong>Based in</strong>
               <span>Trinidad & Tobago</span>
             </div>
-
-            <div className="stat-box">
-              <strong>Response</strong>
-              <span>Within 24h</span>
-            </div>
-
-            <div className="stat-box">
-              <strong>Status</strong>
-              <span>Available</span>
-            </div>
           </div>
 
-          {/* Action Links Grid Column */}
-          <div className="contact-links">
-            <a href="mailto:brittneydhanoo@gmail.com" className="contact-btn email-btn">
-              <MdEmail size={20} />
-              <span>Email Me</span>
-            </a>
-
-            <div className="social-row">
-              <a
-                href="https://github.com/SunshineBri"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-btn social-btn"
-              >
-                <FaGithub size={20} />
-                <span>GitHub</span>
-              </a>
-
-              <a
-                href="https://linkedin.com/in/brittney-dhanoo-176339149"
-                target="_blank"
-                rel="noreferrer"
-                className="contact-btn social-btn"
-              >
-                <FaLinkedin size={20} />
-                <span>LinkedIn</span>
-              </a>
+          {/* Right Column: Direct Email Form Box */}
+          <form onSubmit={handleSubmit} className="contact-form">
+            <h3 className="form-title">Send a Quick Message</h3>
+            
+            <div className="input-group">
+              <input 
+                type="text" 
+                placeholder="Your Name" 
+                required 
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+              />
             </div>
-          </div>
+
+            <div className="input-group">
+              <input 
+                type="email" 
+                placeholder="Your Email" 
+                required 
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+              />
+            </div>
+
+            <div className="input-group">
+              <textarea 
+                placeholder="What's on your mind?" 
+                rows="4" 
+                required
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+              ></textarea>
+            </div>
+
+            <button type="submit" className="form-submit-btn">
+              <span>Send Message</span>
+              <MdSend size={16} />
+            </button>
+          </form>
         </div>
 
       </div>
