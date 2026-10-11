@@ -1,72 +1,301 @@
-#about {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 0 1.5rem;
-  color: #e5e5e5;
-  font-family: 'Space Grotesk', sans-serif;
-  padding-top: 100px;
-  margin-top: -100px;
-}
 
-#about h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #f9fafb;
-  font-weight: 600;
-  text-align: center;
-}
-
-#about .about-content {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-}
-
-#about img {
-  width: 250px;
-  border-radius: 1.5rem;
-  object-fit: cover;
-  box-shadow: 0 0 15px rgba(167, 139, 250, 0.4);
-  flex-shrink: 0;
-}
-
-#about p {
-  flex: 1;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.6;
-  max-width: 600px;
-}
-
-/* Start completely hidden and off screen */
-#about.hidden {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: none;
-  pointer-events: none; /* Optional: prevent interaction when hidden */
-}
-
-/* Fade in smoothly when visible */
-#about.fade-in {
+.about-section {
+  width: min(960px, calc(100% - 3rem));
+  margin: 0 auto;
+  padding: 3.5rem 0 4rem;
+  color: #e5e1ed;
+  font-family: "Space Grotesk", sans-serif;
+  scroll-margin-top: 90px;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-  pointer-events: auto;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  #about .about-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
+/* Reveal on scroll */
+
+.about-section.hidden {
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition: none;
+}
+
+.about-section.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+/* Section heading */
+
+.about-heading {
+  margin-bottom: 2.25rem;
+  text-align: left;
+}
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+  color: #bdb0d7;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.about-eyebrow-line {
+  width: 23px;
+  height: 1px;
+  background: #bba7e7;
+}
+
+.about-heading h2 {
+  margin: 0;
+  color: #f4f1fa;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.045em;
+}
+
+.about-heading h2 span {
+  color: #cbb9f3;
+}
+
+.about-subtitle {
+  margin: 0.7rem 0 0;
+  color: #a9a3b7;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Main content */
+
+.about-content {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.78fr) minmax(0, 1.22fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+/* Image */
+
+.about-image-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  justify-self: center;
+  padding: 0.7rem;
+  border: 1px solid rgb(203 185 243 / 19%);
+  border-radius: 15px;
+  background: linear-gradient(
+    145deg,
+    rgb(203 185 243 / 8%),
+    rgb(255 255 255 / 2%) 60%,
+    rgb(203 185 243 / 5%)
+  );
+  box-shadow: 0 14px 40px rgb(0 0 0 / 14%);
+}
+
+.about-image-wrap::before {
+  position: absolute;
+  z-index: -1;
+  inset: 15%;
+  border-radius: 50%;
+  background: rgb(167 139 250 / 17%);
+  content: "";
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.about-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 4.5;
+  border-radius: 9px;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.88);
+  transition:
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+.about-image-wrap:hover .about-image {
+  transform: scale(1.015);
+  filter: saturate(1);
+}
+
+.about-image-caption {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 0.25rem 0.15rem;
+  color: #bcb3cd;
+  font-size: 0.76rem;
+  letter-spacing: 0.02em;
+}
+
+.about-caption-star {
+  color: #cbb9f3;
+  font-size: 0.95rem;
+}
+
+/* Biography */
+
+.about-text {
+  min-width: 0;
+}
+
+.about-intro {
+  margin: 0 0 1rem;
+  color: #eee9f6;
+  font-size: clamp(1.12rem, 2vw, 1.35rem);
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.about-intro span {
+  color: #cbb9f3;
+}
+
+.about-text > p:not(.about-intro) {
+  margin: 0 0 1rem;
+  color: #aaa4b8;
+  font-size: 0.94rem;
+  line-height: 1.85;
+}
+
+/* Skill highlights */
+
+.about-strengths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+}
+
+.about-strength {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid rgb(203 185 243 / 18%);
+  border-radius: 7px;
+  background: rgb(203 185 243 / 4%);
+  color: #dcd3ed;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.about-strength:hover {
+  border-color: rgb(203 185 243 / 42%);
+  background: rgb(203 185 243 / 8%);
+}
+
+.about-strength-icon {
+  display: inline-flex;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: #cbb9f3;
+}
+
+.about-strength-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tablet */
+
+@media (max-width: 760px) {
+  .about-section {
+    padding: 3rem 0 3.5rem;
   }
 
-  #about img {
-    width: 150px;
-    margin: 0 auto;
+  .about-content {
+    grid-template-columns: minmax(190px, 0.8fr) minmax(0, 1.2fr);
+    gap: 1.75rem;
   }
 
-  #about p {
-    max-width: 100%;
+  .about-image-wrap {
+    max-width: 280px;
+  }
+
+  .about-text > p:not(.about-intro) {
+    font-size: 0.9rem;
+  }
+
+  .about-strengths {
+    gap: 0.5rem;
+  }
+
+  .about-strength {
+    padding: 0.6rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 580px) {
+  .about-section {
+    width: calc(100% - 2.25rem);
+    padding: 2.75rem 0 3rem;
+  }
+
+  .about-heading {
+    margin-bottom: 1.75rem;
+  }
+
+  .about-heading h2 {
+    font-size: clamp(2rem, 9vw, 2.5rem);
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .about-image-wrap {
+    width: min(78%, 280px);
+  }
+
+  .about-image {
+    aspect-ratio: 4 / 3.8;
+  }
+
+  .about-image-caption {
+    font-size: 0.72rem;
+  }
+
+  .about-intro {
+    font-size: 1.13rem;
+  }
+
+  .about-text > p:not(.about-intro) {
+    font-size: 0.91rem;
+    line-height: 1.8;
+  }
+
+  .about-strengths {
+    margin-top: 1.25rem;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-section,
+  .about-image,
+  .about-strength {
+    transition: none;
   }
 }
