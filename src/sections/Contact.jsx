@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail, MdSend } from "react-icons/md";
@@ -5,60 +6,66 @@ import emailjs from "@emailjs/browser";
 import "./Contact.css";
 
 function Contact() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSending(true);
 
-    // Map your form fields to your EmailJS Template variables
     const templateParams = {
       from_name: formData.name,
       from_email: formData.email,
       message: formData.message,
     };
 
-    // Safely fetch keys from your environment variables instead of hardcoding them
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     emailjs
       .send(serviceId, templateId, templateParams, publicKey)
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Message sent successfully! ✨");
-          setFormData({ name: "", email: "", message: "" }); // Reset form inputs
-          setIsSending(false);
-        },
-        (err) => {
-          console.log("FAILED...", err);
-          alert("Oops! Something went wrong. Please try emailing me directly.");
-          setIsSending(false);
-        }
-      );
+      .then(() => {
+        alert("Message sent successfully! ✨");
+        setFormData({ name: "", email: "", message: "" });
+      })
+      .catch((err) => {
+        console.error("FAILED...", err);
+        alert("Oops! Something went wrong. Please try emailing me directly.");
+      })
+      .finally(() => {
+        setIsSending(false);
+      });
   };
 
   return (
     <section id="contact" className="contact-section">
       <div className="contact-glass-card">
-        
         <div className="contact-header">
-          <p className="contact-kicker">Open to work • Freelance • Collaboration</p>
-          <h2 className="contact-title">Let’s Connect</h2>
+          <p className="contact-kicker">
+            Open to work · Freelance · Collaboration
+          </p>
+          <h2 className="contact-title">
+            Let’s Connect<span>.</span>
+          </h2>
           <p className="contact-text">
-            I’m open to opportunities, collaborations, or just a conversation about development and design.
+            I’m open to opportunities, collaborations, or a conversation
+            about development and design.
           </p>
         </div>
 
         <div className="contact-content-grid">
-          {/* Left Column: Primary Action Links + Location */}
           <div className="contact-left-col">
             <div className="contact-links">
-              <a href="mailto:brittneydhanoo@gmail.com" className="contact-btn email-btn">
-                <MdEmail size={20} />
+              <a
+                href="mailto:brittneydhanoo@gmail.com"
+                className="contact-btn email-btn"
+              >
+                <MdEmail size={19} />
                 <span>Email Me</span>
               </a>
 
@@ -69,7 +76,7 @@ function Contact() {
                   rel="noreferrer"
                   className="contact-btn social-btn"
                 >
-                  <FaGithub size={20} />
+                  <FaGithub size={18} />
                   <span>GitHub</span>
                 </a>
 
@@ -79,7 +86,7 @@ function Contact() {
                   rel="noreferrer"
                   className="contact-btn social-btn"
                 >
-                  <FaLinkedin size={20} />
+                  <FaLinkedin size={18} />
                   <span>LinkedIn</span>
                 </a>
               </div>
@@ -87,51 +94,67 @@ function Contact() {
 
             <div className="contact-location">
               <strong>Based in</strong>
-              <span>Trinidad & Tobago</span>
+              <span>Trinidad &amp; Tobago</span>
             </div>
           </div>
 
-          {/* Right Column: Direct Email Form Box */}
           <form onSubmit={handleSubmit} className="contact-form">
             <h3 className="form-title">Send a Quick Message</h3>
-            
+
             <div className="input-group">
-              <input 
-                type="text" 
-                placeholder="Your Name" 
-                required 
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                aria-label="Your Name"
+                autoComplete="name"
+                required
                 value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
               />
             </div>
 
             <div className="input-group">
-              <input 
-                type="email" 
-                placeholder="Your Email" 
-                required 
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                aria-label="Your Email"
+                autoComplete="email"
+                required
                 value={formData.email}
-                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
               />
             </div>
 
             <div className="input-group">
-              <textarea 
-                placeholder="What's on your mind?" 
-                rows="4" 
+              <textarea
+                name="message"
+                placeholder="What's on your mind?"
+                aria-label="Your Message"
+                rows="4"
                 required
                 value={formData.message}
-                onChange={(e) => setFormData({...formData, message: e.target.value})}
-              ></textarea>
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+              />
             </div>
 
-            <button type="submit" className="form-submit-btn" disabled={isSending}>
+            <button
+              type="submit"
+              className="form-submit-btn"
+              disabled={isSending}
+            >
               <span>{isSending ? "Sending..." : "Send Message"}</span>
               <MdSend size={16} />
             </button>
           </form>
         </div>
-
       </div>
     </section>
   );
